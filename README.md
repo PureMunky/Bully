@@ -1,7 +1,7 @@
 Bully: Pushover Alerts
 ==============
 
-## Overall
+## Overview
 JavaScript that makes sending alerts through Pushover even easier.
 
 ## Pushover
