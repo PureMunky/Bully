@@ -11,7 +11,7 @@ JavaScript that makes sending alerts through Pushover even easier. Send a messag
 ### Initilization
 To initialize Bully you give it your Application Key assigned by Pushover.net (this only needs to be done once):
 
-	Bully.SetAppKey('#YourAppKey');
+	Bully.SetAppKey('#AppKey');
 
 ### Message Format - TODO
 A message can be a string or an object:
@@ -21,9 +21,11 @@ A message can be a string or an object:
 or 
 
 	var message = {
-		message: 'Bully is the best!!',		// Required
-		title: 'Bully Alert',				// Optional - Default: null
-		highPriority: true					// Optional - Default: false
+		message: 'Bully is the best!!',				// Required
+		title: 'Bully Alert',						// Optional - Default: null
+		priority: 1,								// Optional - Default: 0
+		url: 'https://github.com/PureMunky/Bully',	// Optional - Default: null
+		url_title: 'Bully on Github'				// Optional - Default: null
 	};
 
 ### Send - TODO
