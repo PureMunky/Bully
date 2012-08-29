@@ -5,6 +5,59 @@ var Bully = (function ($) {
     // Privates
     var _AppKey;
 
+	var _SendOne = function(User, AppKey, Message) {	
+		$.ajax({
+            type: 'POST',
+            url: PUSHOVER_API,
+            data: {
+                token: AppKey,
+                user: User.key,
+                message: Message.message,
+                device: User.device,
+                title: Message.title,
+                priority: Message.priority,
+                url: Message.url,
+                url_title: Message.url_title
+            }
+        });
+	};
+	
+	var _Send = function(Users, AppKey, Message) {
+		for(var i = 0; i < Users.Length -1; i++) {
+			_SendOne(Users[i], AppKey, Message);
+		}
+	};
+	
+	var _TranslateUser = function(User) {
+		// Take any potential user input and translate it to an array of user objects.
+		if(typeof(User) == 'string') {
+			var ar = new Array();
+			ar.push({
+				key: User
+			});
+			return ar;
+		} else if(typeof(User) == 'object') {
+			if(User.length || User.length == 0) {
+				if(User.length > 0) {
+					var ar = new Array();
+					for(var i = 0; i < User.length - 1; i++) {
+						ar.push(_TranslateUser(User[i])[0]);
+					}
+					return ar;
+				}
+				return new Array();
+			} else {
+				if(User.key) {
+					var ar = new Array();
+					ar.push(User);
+					return ar;
+				}
+			}
+			return false;
+		}
+		return false;
+	};
+	
     return {
         SetAppKey: function (AppKey) {
             _AppKey = AppKey;
@@ -27,6 +80,9 @@ var Bully = (function ($) {
             } else {
                 return false;
             }
+        },
+        TranslateUser: function (User) {
+        	return _TranslateUser(User);
         }
     };
 })(jQuery);

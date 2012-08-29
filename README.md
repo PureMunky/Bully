@@ -45,16 +45,16 @@ User Format (string, object, or array):
 or
 
 	var user = {
-		userKey: '#UserKey',
+		key: '#UserKey',
 		device: 'xoom'
 	};
 	
 or
 
 	var users = [
-		{userKey: '#UserKey1', device: 'xoom'},
-		{userKey: '#UserKey2', device: 'galaxynexus'},
-		{userKey: '#UserKey3'},
+		{key: '#UserKey1', device: 'xoom'},
+		{key: '#UserKey2', device: 'galaxynexus'},
+		{key: '#UserKey3'},
 		'#UserKey4'
 	];
 	
