@@ -4,7 +4,8 @@ var Bully = (function ($) {
     
     // Privates
     var _AppKey;
-
+	var _UserList = new Array();
+	
 	var _SendOne = function(User, AppKey, Message) {	
 		$.ajax({
             type: 'POST',
@@ -83,6 +84,12 @@ var Bully = (function ($) {
         },
         TranslateUser: function (User) {
         	return _TranslateUser(User);
+        },
+        AddUser: function (User) {
+        	_UserList.push(_TranslateUser(User));
+        },
+        Users: function() {
+        	return _UserList;
         }
     };
 })(jQuery);

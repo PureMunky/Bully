@@ -65,7 +65,15 @@ Adding a user to the queue that Bully will send messages to:
 Removing a user from the list:
 
 	Bully.RemoveUser('#UserKey');
+
+Clear User List:
+
+	Bully.ClearUsers();
 	
+Retrieving the list of Users:
+
+	Bully.Users();
+
 ## Pushover
 Website: <https://pushover.net/>  
 API: <https://pushover.net/api>
