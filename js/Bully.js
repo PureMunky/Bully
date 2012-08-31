@@ -41,7 +41,7 @@ var Bully = (function ($) {
 			if(User.length || User.length == 0) {
 				if(User.length > 0) {
 					var ar = new Array();
-					for(var i = 0; i < User.length - 1; i++) {
+					for(var i = 0; i < User.length; i++) {
 						ar.push(_TranslateUser(User[i])[0]);
 					}
 					return ar;
@@ -86,10 +86,24 @@ var Bully = (function ($) {
         	return _TranslateUser(User);
         },
         AddUser: function (User) {
-        	_UserList.push(_TranslateUser(User));
+            var users = _TranslateUser(User);
+            for(var i = 0; i < users.length; i++) {
+        	   _UserList.push(users[i]);
+        	}
+        },
+        RemoveUser: function (User) {
+            var ar = new Array();
+            var users = _TranslateUser(User);
+            for(var i = 0; i < _UserList.length; i++) {
+               if(users.indexOf(_UserList[i]) == -1) ar.push(_UserList[i]);
+            }
+            _UserList = ar;
         },
         Users: function() {
         	return _UserList;
+        },
+        ClearUsers: function() {
+            _UserList = new Array();
         }
     };
 })(jQuery);

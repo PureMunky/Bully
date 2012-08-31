@@ -30,11 +30,13 @@ test('TranlateUser - Multiple', function (){
 	
 	var rtnUser = Bully.TranslateUser(users);
 	
-	expect(users.length);
+	expect(rtnUser.length);
 	
-	for(var i = 0; i < rtnUser.length - 1; i++) {
-		ok(rtnUser[i].key, 'Translated Key:' + rtnUser.key);
-	}
+	ok(rtnUser[0].key && rtnUser[0].device, 'Translated Key:' + rtnUser[0].key);
+	ok(rtnUser[1].key && rtnUser[1].device, 'Translated Key:' + rtnUser[1].key);
+	ok(rtnUser[2].key && !rtnUser[2].device, 'Translated Key:' + rtnUser[2].key);
+	ok(rtnUser[3].key && !rtnUser[3].device, 'Translated Key:' + rtnUser[3].key);
+	
 });
 
 test('Retrieve User List', function (){
@@ -43,12 +45,37 @@ test('Retrieve User List', function (){
 	ok(users, 'Users function exists')
 });
 
-test('Add User', function (){
+test('Add User - String', function (){
+    Bully.ClearUsers();
 	Bully.AddUser('#UserKey');
 	
 	var users = Bully.Users();
 	expect(1);
 	equal(users.length, 1, 'One User in the collection');
+});
+
+test('Add User - Object', function (){
+    Bully.ClearUsers();
+    Bully.AddUser({key: '#UserKey', device: 'xoom'});
+    
+    var users = Bully.Users();
+    expect(1);
+    equal(users.length, 1, 'One User in the collection');
+});
+
+test('Add User - Array', function (){
+    Bully.ClearUsers();
+    var inUsers = [
+        {key: '#UserKey1', device: 'xoom'},
+        {key: '#UserKey2', device: 'galaxynexus'},
+        {key: '#UserKey3'},
+        '#UserKey4'
+    ];
+    Bully.AddUser(inUsers);
+    
+    var users = Bully.Users();
+    expect(1);
+    equal(users.length, 4, 'One User in the collection');
 });
 
 test('Clear User List', function(){
@@ -61,6 +88,7 @@ test('Clear User List', function(){
 test('Remove User', function (){
 	Bully.AddUser('#UserKey1');
 	Bully.AddUser('#UserKey2');
+	Bully.RemoveUser('#UserKey1');
 	expect(1);
 	equal(Bully.Users().length, 1, 'Removed a single user');
 });
