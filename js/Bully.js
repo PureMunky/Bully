@@ -82,9 +82,6 @@ var Bully = (function ($) {
                 return false;
             }
         },
-        TranslateUser: function (User) {
-        	return _TranslateUser(User);
-        },
         AddUser: function (User) {
             var users = _TranslateUser(User);
             for(var i = 0; i < users.length; i++) {

@@ -1,44 +1,5 @@
 module('User');
 
-test('TranslateUser - String', function() {
-	var user = Bully.TranslateUser('test');
-	expect(1);
-	equal(user.length, 1, 'One User Returned');
-});
-
-test('TranslateUser - Object', function() {
-	var user = Bully.TranslateUser({key: 'test'});
-	expect(1);
-	equal(user[0].key, 'test', 'One User Returned');
-});
-
-test('TranslateUser - Array', function() {
-	var ar = new Array();
-	ar.push({key: 'test'});
-	var user = Bully.TranslateUser(ar);
-	expect(1);
-	equal(user[0].key, 'test', 'One User Returned');
-});
-
-test('TranlateUser - Multiple', function (){
-	var users = [
-		{key: '#UserKey1', device: 'xoom'},
-		{key: '#UserKey2', device: 'galaxynexus'},
-		{key: '#UserKey3'},
-		'#UserKey4'
-	];
-	
-	var rtnUser = Bully.TranslateUser(users);
-	
-	expect(rtnUser.length);
-	
-	ok(rtnUser[0].key && rtnUser[0].device, 'Translated Key:' + rtnUser[0].key);
-	ok(rtnUser[1].key && rtnUser[1].device, 'Translated Key:' + rtnUser[1].key);
-	ok(rtnUser[2].key && !rtnUser[2].device, 'Translated Key:' + rtnUser[2].key);
-	ok(rtnUser[3].key && !rtnUser[3].device, 'Translated Key:' + rtnUser[3].key);
-	
-});
-
 test('Retrieve User List', function (){
 	var users = Bully.Users();
 	expect(1);
@@ -50,17 +11,22 @@ test('Add User - String', function (){
 	Bully.AddUser('#UserKey');
 	
 	var users = Bully.Users();
-	expect(1);
+	expect(2);
 	equal(users.length, 1, 'One User in the collection');
+	ok(users[0].key == '#UserKey', 'User has correct key');
 });
 
 test('Add User - Object', function (){
+    var userKey = '#UserKey',
+        deviceName = '#deviceName';
+        
     Bully.ClearUsers();
-    Bully.AddUser({key: '#UserKey', device: 'xoom'});
+    Bully.AddUser({key: userKey, device: deviceName});
     
     var users = Bully.Users();
-    expect(1);
+    expect(2);
     equal(users.length, 1, 'One User in the collection');
+    ok(users[0].key == userKey && users[0].device == deviceName, 'User has correct key/device combo')
 });
 
 test('Add User - Array', function (){
@@ -74,8 +40,12 @@ test('Add User - Array', function (){
     Bully.AddUser(inUsers);
     
     var users = Bully.Users();
-    expect(1);
+    expect(5);
     equal(users.length, 4, 'One User in the collection');
+    ok(users[0].key && users[0].device, "User 1 has a key and device");
+    ok(users[1].key && users[1].device, "User 2 has a key and device");
+    ok(users[2].key, "User 3 has a key");
+    ok(users[3].key, "User 4 has a key");
 });
 
 test('Clear User List', function(){
@@ -92,7 +62,6 @@ test('Remove User', function (){
 	expect(1);
 	equal(Bully.Users().length, 1, 'Removed a single user');
 });
-
 
 module('Messages');
 

@@ -1,7 +1,5 @@
-Bully: Pushover Alerts
+Bully: Pushover Alerts v0.2.0	
 ==============
-Phil Corbett
-@PureMunky
 
 ## Overview
 JavaScript that makes sending alerts through Pushover even easier. Send a message in one line:
