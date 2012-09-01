@@ -1,5 +1,6 @@
 Bully: Pushover Alerts
 ==============
+Version: 0.1.0
 
 ## Overview
 JavaScript that makes sending alerts through Pushover even easier.
