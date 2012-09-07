@@ -6,20 +6,23 @@ var Bully = (function ($) {
     var _AppKey;
 	var _UserList = new Array();
 	
-	var _SendOne = function(Message, User, AppKey) {	
+	var _SendOne = function(Message, User, AppKey) {
+	    var MessageData = {
+            token: AppKey,
+            user: User.key,
+            message: Message.message
+        };
+        
+        if(User.device) MessageData.device = User.device;
+        if(Message.title) MessageData.title = Message.title;
+        if(Message.priority) MessageData.priority = Message.priority;
+        if(Message.url) MessageData.url = Message.url;
+        if(Message.url_title) MessageData.url_title = Message.url_title;
+
 		$.ajax({
             type: 'POST',
             url: PUSHOVER_API,
-            data: {
-                token: AppKey,
-                user: User.key,
-                message: Message.message,
-                device: User.device,
-                title: Message.title,
-                priority: Message.priority,
-                url: Message.url,
-                url_title: Message.url_title
-            }
+            data: MessageData
         });
 	};
 	
@@ -28,8 +31,8 @@ var Bully = (function ($) {
 	    var UserList = Users ? _TranslateUser(Users) : _UserList;
 	    var ApplicationKey = AppKey ? AppKey : _AppKey;
 	    
-		for(var i = 0; i < UserList.Length; i++) {
-			_SendOne(UserList[i], ApplicationKey, msg);
+		for(var i = 0; i < UserList.length; i++) {
+			_SendOne(msg, UserList[i], ApplicationKey);
 		}
 	};
 	
