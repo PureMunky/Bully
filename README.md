@@ -1,4 +1,4 @@
-Bully: Pushover Alerts v0.2.0	
+Bully: Pushover Alerts v0.3.0	
 ==============
 
 ## Overview
