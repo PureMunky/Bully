@@ -94,3 +94,7 @@ test('Send Exists', function(){
 	ok(Bully.Send, 'Send function exists.');
 });
 
+test('Send Message - No Init', function() {
+    
+});
+
