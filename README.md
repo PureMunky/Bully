@@ -1,21 +1,75 @@
-Bully: Pushover Alerts
+Bully: Pushover Alerts v0.2.0	
 ==============
 Version: 0.1.0
 
 ## Overview
-JavaScript that makes sending alerts through Pushover even easier.
+JavaScript that makes sending alerts through Pushover even easier. Send a message in one line:
+
+	Bully.Send('Bully is the best!!', '#UserKey', '#AppKey');
 
 ## Usage
 	
 ### Initilization
 To initialize Bully you give it your Application Key assigned by Pushover.net (this only needs to be done once):
 
-	Bully.SetAppKey('#YourAppKey');
+	Bully.SetAppKey('#AppKey');
 
-### Send a Message
-Sending a message through Bully is as simple as giving it a User Key and message:
+### Message Format
+A message can be a string or an object:
 
-	Bully.Send('#UserKey', 'Bully is the best!!');
+	var message = 'Bully is the best!!';
+	
+or 
+
+	var message = {
+		message: 'Bully is the best!!',				// Required
+		title: 'Bully Alert',						// Optional - Default: null
+		priority: 1,								// Optional - Default: 0
+		url: 'https://github.com/PureMunky/Bully',	// Optional - Default: null
+		url_title: 'Bully on Github'				// Optional - Default: null
+	};
+
+### Send
+Sending a message:
+
+	Bully.Send('Bully is the best!!');
+	
+	Bully.Send('Bully is the best!!', '#UserKey');
+	
+	Bully.Send('Bully is the best!!', '#UserKey', '#AppKey');
+
+### Managing User List
+User Format (string, object, or array):
+
+	var user = '#UserKey';
+
+or
+
+	var user = {
+		key: '#UserKey',
+		device: 'xoom'
+	};
+	
+or
+
+	var users = [
+		{key: '#UserKey1', device: 'xoom'},
+		{key: '#UserKey2', device: 'galaxynexus'},
+		{key: '#UserKey3'},
+		'#UserKey4'
+	];
+	
+Adding a user to the queue that Bully will send messages to:
+
+	Bully.AddUser('#UserKey');
+
+Clear User List:
+
+	Bully.ClearUsers();
+	
+Retrieving the list of Users:
+
+	Bully.Users();
 
 ## Pushover
 Website: <https://pushover.net/>  
