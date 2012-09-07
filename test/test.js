@@ -95,6 +95,6 @@ test('Send Exists', function(){
 });
 
 test('Send Message - No Init', function() {
-    
+    Bully.Send('Send Message - No Init', 'ms4Kc19KyK63AnIklfqr5j8PUqPugM', 'Hiegxfia0UWmlNmtqpbUab8UNtr1Nb');
 });
 

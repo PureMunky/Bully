@@ -26,7 +26,7 @@ var Bully = (function ($) {
 	var _Send = function(Message, Users, AppKey) {
 	    var msg = _TranslateMessage(Message);
 	    var UserList = Users ? _TranslateUser(Users) : _UserList;
-	    var ApplicationKey = AppKey ? Appkey : _AppKey;
+	    var ApplicationKey = AppKey ? AppKey : _AppKey;
 	    
 		for(var i = 0; i < UserList.Length -1; i++) {
 			_SendOne(Users[i], ApplicationKey, msg);
