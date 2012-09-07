@@ -55,26 +55,36 @@ test('Clear User List', function(){
 	equal(Bully.Users().length, 0, 'User list is clear');
 });
 
-test('Remove User', function (){
-	Bully.AddUser('#UserKey1');
-	Bully.AddUser('#UserKey2');
-	Bully.RemoveUser('#UserKey1');
-	expect(1);
-	equal(Bully.Users().length, 1, 'Removed a single user');
-});
-
 module('Messages');
 
-test('Message Structure', function(){
+test('Message Structure - String', function(){
 	var msg = Bully.TranslateMessage('Test Message');
 	
 	expect(5)
 	
 	ok(msg.message, 'Has a message');
-	ok(msg.title, 'Has a title');
-	ok(msg.priority, 'Has a priority');
-	ok(msg.url, 'Has a URL');
-	ok(msg.url_title, 'Has a URL title');
+	ok(msg.title === null, 'Has a title');
+	ok(msg.priority === 0, 'Has a priority');
+	ok(msg.url === null, 'Has a URL');
+	ok(msg.url_title === null, 'Has a URL title');
+});
+
+test('Message Structure - Object', function(){
+    var msg = Bully.TranslateMessage({
+        message: 'Test Message',
+        title: 'Message Title',
+        priority: 0,
+        url: 'https://github.com/PureMunky/Bully',
+        url_title: 'Bully on Github'
+    });
+    
+    expect(5)
+    
+    ok(msg.message, 'Has a message');
+    ok(msg.title === 'Message Title', 'Has a title');
+    ok(msg.priority === 0, 'Has a priority');
+    ok(msg.url === 'https://github.com/PureMunky/Bully', 'Has a URL');
+    ok(msg.url_title === 'Bully on Github', 'Has a URL title');
 });
 
 module('Send');

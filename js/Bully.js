@@ -6,7 +6,7 @@ var Bully = (function ($) {
     var _AppKey;
 	var _UserList = new Array();
 	
-	var _SendOne = function(User, AppKey, Message) {	
+	var _SendOne = function(Message, User, AppKey) {	
 		$.ajax({
             type: 'POST',
             url: PUSHOVER_API,
@@ -23,9 +23,13 @@ var Bully = (function ($) {
         });
 	};
 	
-	var _Send = function(Users, AppKey, Message) {
-		for(var i = 0; i < Users.Length -1; i++) {
-			_SendOne(Users[i], AppKey, Message);
+	var _Send = function(Message, Users, AppKey) {
+	    var msg = _TranslateMessage(Message);
+	    var UserList = Users ? _TranslateUser(Users) : _UserList;
+	    var ApplicationKey = AppKey ? Appkey : _AppKey;
+	    
+		for(var i = 0; i < UserList.Length -1; i++) {
+			_SendOne(Users[i], ApplicationKey, msg);
 		}
 	};
 	
@@ -59,6 +63,29 @@ var Bully = (function ($) {
 		return false;
 	};
 	
+	var _TranslateMessage = function(Message) {
+	    // Define the message defaults.
+	    var msg = {
+            message: 'Bully is the best!!',
+            title: null,
+            priority: 0,
+            url: null,
+            url_title: null
+        };
+        
+	    if(typeof(Message) == 'string') {
+	        msg.message = Message;
+	        return msg;
+	    } else if(typeof(Message) == 'object'){
+	        msg.message = Message.message ? Message.message : 'Default Title';
+	        msg.title = Message.title ? Message.title : msg.title;
+            msg.priority = Message.priority ? Message.priority : msg.priority;
+            msg.url = Message.url ? Message.url : msg.url;
+            msg.url_title = Message.url_title ? Message.url_title : msg.url_title;
+            return msg;
+	    }
+	}
+	
     return {
         SetAppKey: function (AppKey) {
             _AppKey = AppKey;
@@ -88,19 +115,14 @@ var Bully = (function ($) {
         	   _UserList.push(users[i]);
         	}
         },
-        RemoveUser: function (User) {
-            var ar = new Array();
-            var users = _TranslateUser(User);
-            for(var i = 0; i < _UserList.length; i++) {
-               if(users.indexOf(_UserList[i]) == -1) ar.push(_UserList[i]);
-            }
-            _UserList = ar;
-        },
         Users: function() {
         	return _UserList;
         },
         ClearUsers: function() {
             _UserList = new Array();
+        },
+        TranslateMessage: function(Message) {
+            return _TranslateMessage(Message);
         }
     };
 })(jQuery);
