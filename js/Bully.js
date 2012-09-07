@@ -28,8 +28,8 @@ var Bully = (function ($) {
 	    var UserList = Users ? _TranslateUser(Users) : _UserList;
 	    var ApplicationKey = AppKey ? AppKey : _AppKey;
 	    
-		for(var i = 0; i < UserList.Length -1; i++) {
-			_SendOne(Users[i], ApplicationKey, msg);
+		for(var i = 0; i < UserList.Length; i++) {
+			_SendOne(UserList[i], ApplicationKey, msg);
 		}
 	};
 	
