@@ -93,8 +93,3 @@ test('Send Exists', function(){
 	expect(1);
 	ok(Bully.Send, 'Send function exists.');
 });
-
-test('Send Message - No Init', function() {
-    Bully.Send('Send Message - No Init', 'ms4Kc19KyK63AnIklfqr5j8PUqPugM', 'Hiegxfia0UWmlNmtqpbUab8UNtr1Nb');
-});
-
