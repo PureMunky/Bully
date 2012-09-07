@@ -13,7 +13,7 @@ To initialize Bully you give it your Application Key assigned by Pushover.net (t
 
 	Bully.SetAppKey('#AppKey');
 
-### Message Format - TODO
+### Message Format
 A message can be a string or an object:
 
 	var message = 'Bully is the best!!';
@@ -28,7 +28,7 @@ or
 		url_title: 'Bully on Github'				// Optional - Default: null
 	};
 
-### Send - TODO
+### Send
 Sending a message:
 
 	Bully.Send('Bully is the best!!');
@@ -37,7 +37,7 @@ Sending a message:
 	
 	Bully.Send('Bully is the best!!', '#UserKey', '#AppKey');
 
-### Managing User List - TODO
+### Managing User List
 User Format (string, object, or array):
 
 	var user = '#UserKey';
@@ -61,10 +61,6 @@ or
 Adding a user to the queue that Bully will send messages to:
 
 	Bully.AddUser('#UserKey');
-
-Removing a user from the list:
-
-	Bully.RemoveUser('#UserKey');
 
 Clear User List:
 

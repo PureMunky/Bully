@@ -94,7 +94,6 @@ var Bully = (function ($) {
             _AppKey = AppKey;
         },
         Send: function (message, users, appkey) {
-            // Send a message to a user through Pushover's API.
             _Send(message, users, appkey);
         },
         AddUser: function (User) {
