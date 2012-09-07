@@ -90,24 +90,9 @@ var Bully = (function ($) {
         SetAppKey: function (AppKey) {
             _AppKey = AppKey;
         },
-        Send: function (UserKey, message, device, title) {
+        Send: function (message, users, appkey) {
             // Send a message to a user through Pushover's API.
-            if (_AppKey) {
-                $.ajax({
-                    type: 'POST',
-                    url: PUSHOVER_API,
-                    data: {
-                        token: _AppKey,
-                        user: UserKey,
-                        message: message,
-                        device: device,
-                        title: title
-                    }
-                });
-                return true;
-            } else {
-                return false;
-            }
+            _Send(message, users, appkey);
         },
         AddUser: function (User) {
             var users = _TranslateUser(User);
